@@ -37,19 +37,28 @@ class BugPatternsAnalysis:
                 if keyword in issue_text:
                     bug_patterns_count[keyword] = bug_patterns_count.get(keyword, 0) + 1
 
+        bug_patterns_count = sorted(bug_patterns_count.items(), key=lambda x: x[1], reverse=True)
+
         # Output results
         print("\n\nBug Patterns and Frequency Analysis:\n")
-        for keyword, count in bug_patterns_count.items():
+        for keyword, count in bug_patterns_count:
             print(f"{keyword.capitalize()}: {count} occurrences")
 
         ### BAR CHART FOR BUG PATTERNS
         # Visualize the frequency of each bug pattern in a bar chart
         if bug_patterns_count:
-            df_bug_patterns = pd.DataFrame(list(bug_patterns_count.items()), columns=['Pattern', 'Frequency'])
-            df_bug_patterns.set_index('Pattern').plot(kind='bar', figsize=(12, 6), title="Bug Patterns and Their Frequency")
+            df_bug_patterns = pd.DataFrame(list(bug_patterns_count), columns=['Pattern', 'Frequency'])
+            ax = df_bug_patterns.set_index('Pattern').plot(kind='bar', figsize=(12, 6), title="Bug Patterns and Their Frequency")
             plt.xlabel("Bug Patterns")
             plt.ylabel("Frequency")
+
+            for p in ax.patches:
+                ax.annotate(f'{int(p.get_height())}', 
+                (p.get_x() + p.get_width() / 2, p.get_height()), 
+                ha='center', va='bottom', fontsize=10, color='black')
+            
             plt.show()
+
         else:
             print("No bug patterns found.\n")
 

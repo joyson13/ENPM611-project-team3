@@ -9,7 +9,7 @@ import argparse
 
 import config
 from example_analysis import ExampleAnalysis
-from feature_1 import BugPatternsAnalysis
+from bug_pattern_analysis import BugPatternsAnalysis
 from Contributor_and_assignee_analysis import ContributorAndAssigneeAnalysis
 
 
