@@ -9,7 +9,9 @@ import argparse
 
 import config
 from example_analysis import ExampleAnalysis
+from feature_1 import BugPatternsAnalysis
 from Contributor_and_assignee_analysis import ContributorAndAssigneeAnalysis
+
 
 def parse_args():
     """
@@ -48,7 +50,7 @@ config.overwrite_from_args(args)
 if args.feature == 0:
     ExampleAnalysis().run()
 elif args.feature == 1:
-    pass # TODO call first analysis
+    BugPatternsAnalysis().run()
 elif args.feature == 2:
     ContributorAndAssigneeAnalysis().fetch_and_plot()
 elif args.feature == 3:
