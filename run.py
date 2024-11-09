@@ -52,7 +52,13 @@ if args.feature == 0:
 elif args.feature == 1:
     BugPatternsAnalysis().run()
 elif args.feature == 2:
-    ContributorAndAssigneeAnalysis().fetch_and_plot()
+    # Handle label option for feature 2
+    if args.label:
+        # Pass label as parameter to the function
+        ContributorAndAssigneeAnalysis().fetch_and_plot_with_label(args.label)
+    else:
+        # Default behavior for feature 2 when no label is passed
+        ContributorAndAssigneeAnalysis().fetch_and_plot()
 elif args.feature == 3:
     pass # TODO call third analysis
 else:
