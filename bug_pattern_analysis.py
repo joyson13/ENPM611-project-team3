@@ -53,6 +53,7 @@ class BugPatternsAnalysis:
             )
             plt.xlabel("Bug Patterns")
             plt.ylabel("Frequency")
+            plt.xticks(rotation=45)  # Rotate x-axis labels by 45 degrees
 
             for bar in bug_patterns_chart.patches:
                 bug_patterns_chart.annotate(
@@ -95,6 +96,7 @@ class BugPatternsAnalysis:
             )
             plt.xlabel("Bug Patterns")
             plt.ylabel("Frequency")
+            plt.xticks(rotation=45)  # Rotate x-axis labels by 45 degrees
 
             for bar in creator_bug_patterns_chart.patches:
                 creator_bug_patterns_chart.annotate(
@@ -110,4 +112,4 @@ class BugPatternsAnalysis:
             print(f"No bug patterns found for creator '{self.user}'.\n")
 
 if __name__ == "__main__":
-    BugPatternsAnalysis().run()
+    BugPatternsAnalysis().fetch_and_plot()
