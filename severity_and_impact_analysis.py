@@ -1,4 +1,5 @@
 # Import modules
+import re
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -17,7 +18,7 @@ class SeverityAndImpactAnalysis:
         self.issues: List[Issue] = DataLoader().get_issues()
         self.df = pd.DataFrame.from_records([issue.__dict__ for issue in self.issues])
         self.label_severity_mapping = {'Bug': 5, 'Needs Triage': 3, 'Feature': 1}
-        self.state_severity_mapping = {'open': 2, 'closed': 1}
+        self.state_severity_mapping = {'open': 2, 'closed': 0}
     
     def calculate_severity(self, issue):
         # Assign severity based on labels and state
@@ -39,8 +40,8 @@ class SeverityAndImpactAnalysis:
         event_impact = len(issue['events'])
         
         for keyword in critical_labels:
-            count_in_title = 0 if issue['title'] is None else issue['title'].count(keyword) 
-            count_in_text = 0 if issue['text'] is None else issue['text'].count(keyword)
+            count_in_title = 0 if issue['title'] is None else len(re.findall(keyword, issue["title"], re.IGNORECASE))
+            count_in_text = 0 if issue['text'] is None else len(re.findall(keyword, issue["text"], re.IGNORECASE))
 
         keyword_count = count_in_title + count_in_text
         

@@ -32,6 +32,7 @@ python run.py -f | --feature FEATURE [-u | --user USER] [-l | --label LABEL]
 ### Description of Features
 #### 1. Bug Pattern analysis
   Analyze and visualize trends in issues based on labels\
+<<<<<<< Updated upstream
   Options accepted: -u | --user USER (Analyzes for all users if not provided)
 
 #### 2. Contributor and Assignee analysis
@@ -40,6 +41,19 @@ python run.py -f | --feature FEATURE [-u | --user USER] [-l | --label LABEL]
 
 #### 3. Severity and Impact analysis
   Identify and visualize trends in severity patterns in contrast to the impact caused by issues
+=======
+  Options accepted: -u | --user USER (Analyzes for all users if not provided)\
+  Command Syntax: `python run.py -f 1 [-u | --user USER]`
+
+#### 2. Contributor and Assignee analysis
+  Filter most engaged contributors and assignees based on type of issue\
+  Options accepted: -l | --label LABEL (Analyzes for all labels if not provided)\
+  Command syntax: `python run.py -f 2 [-l | --label LABEL]`
+
+#### 3. Severity and Impact analysis
+  Identify and visualize trends in severity patterns in contrast to the impact caused by issues\
+  Command syntax: `python run.py -f 3`
+>>>>>>> Stashed changes
 
 ### Description of Options
 `-f | --feature FEATURE`: provide the corresponding feature number (from above) to run analysis\

@@ -8,7 +8,6 @@ the command line to run the analyses.
 import argparse
 
 import config
-from example_analysis import ExampleAnalysis
 from severity_and_impact_analysis import SeverityAndImpactAnalysis
 
 
