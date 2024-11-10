@@ -8,9 +8,9 @@ the command line to run the analyses.
 import argparse
 import config
 
-from bug_pattern_analysis import BugPatternsAnalysis
-from contributor_and_assignee_analysis import ContributorAndAssigneeAnalysis
-from severity_and_impact_analysis import SeverityAndImpactAnalysis
+from features.bug_pattern_analysis import BugPatternsAnalysis
+from features.contributor_and_assignee_analysis import ContributorAndAssigneeAnalysis
+from features.severity_and_impact_analysis import SeverityAndImpactAnalysis
 
 
 def parse_args():

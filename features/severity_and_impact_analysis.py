@@ -52,31 +52,34 @@ class SeverityAndImpactAnalysis:
         self.df['severity_score'] = self.df.apply(self.calculate_severity, axis=1)
         self.df['impact_score'] = self.df.apply(self.calculate_impact, axis=1)
     
-    # Plot of impact distribution
-    def plot_severity_distribution(self):
-        plt.figure(figsize=(10, 6))
-        sns.histplot(self.df['severity_score'], kde=True, color='skyblue')
-        plt.title('Severity Score Distribution')
-        plt.xlabel('Severity Score')
-        plt.ylabel('Frequency')
-        plt.show()
+    # Plot all the visualizations
+    def plot_combined_visualizations(self):        
+        # Create the main figure with GridSpec
+        fig = plt.figure(constrained_layout=True, figsize=(14, 10))
+        grid = fig.add_gridspec(2, 2, width_ratios=[1, 1], height_ratios=[1, 1.5])
 
-    # Plot of impact distribution
-    def plot_impact_distribution(self):
-        plt.figure(figsize=(10, 6))
-        sns.histplot(self.df['impact_score'], kde=True, color='coral')
-        plt.title('Impact Score Distribution')
-        plt.xlabel('Impact Score')
-        plt.ylabel('Frequency')
-        plt.show()
+        # Plot severity score distribution (top left)
+        ax1 = fig.add_subplot(grid[0, 0])
+        sns.histplot(self.df['severity_score'], kde=True, color='skyblue', ax=ax1)
+        ax1.set_title('Severity Score Distribution')
+        ax1.set_xlabel('Severity Score')
+        ax1.set_ylabel('Frequency')
 
-    # Plot of severity vs impact
-    def plot_severity_vs_impact(self):
-        plt.figure(figsize=(10, 6))
-        sns.scatterplot(x='severity_score', y='impact_score', data=self.df, hue='state', palette="coolwarm")
-        plt.title('Severity vs Impact of Issues')
-        plt.xlabel('Severity Score')
-        plt.ylabel('Impact Score')
+        # Plot impact score distribution (top right)
+        ax2 = fig.add_subplot(grid[0, 1])
+        sns.histplot(self.df['impact_score'], kde=True, color='coral', ax=ax2)
+        ax2.set_title('Impact Score Distribution')
+        ax2.set_xlabel('Impact Score')
+        ax2.set_ylabel('Frequency')
+
+        # Plot severity vs impact (spans across two columns in bottom row)
+        ax3 = fig.add_subplot(grid[1, :])
+        sns.scatterplot(x='severity_score', y='impact_score', data=self.df, hue='state', palette="coolwarm", ax=ax3)
+        ax3.set_title('Severity vs Impact of Issues')
+        ax3.set_xlabel('Severity Score')
+        ax3.set_ylabel('Impact Score')
+
+        plt.title("Severity and Impact analysis")
         plt.show()
 
     def fetch_and_plot(self):
@@ -88,9 +91,7 @@ class SeverityAndImpactAnalysis:
         self.apply_analysis()
         
         # Plotting visualizations
-        self.plot_severity_distribution()
-        self.plot_impact_distribution()
-        self.plot_severity_vs_impact()
+        self.plot_combined_visualizations()
 
 
 if __name__ == '__main__':
