@@ -47,7 +47,7 @@ args = parse_args()
 config.overwrite_from_args(args)
     
 # Run the feature specified in the --feature flag
-elif args.feature == 1:
+if args.feature == 1:
     BugPatternsAnalysis().run()
 elif args.feature == 2:
     ContributorAndAssigneeAnalysis().fetch_and_plot()
