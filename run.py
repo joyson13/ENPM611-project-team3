@@ -48,7 +48,7 @@ config.overwrite_from_args(args)
     
 # Run the feature specified in the --feature flag
 if args.feature == 1:
-    BugPatternsAnalysis().run()
+    BugPatternsAnalysis().fetch_and_plot()
 elif args.feature == 2:
     ContributorAndAssigneeAnalysis().fetch_and_plot()
 elif args.feature == 3:
