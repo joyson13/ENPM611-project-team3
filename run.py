@@ -51,6 +51,6 @@ if args.feature == 1:
 elif args.feature == 2:
     pass # TODO call second analysis
 elif args.feature == 3:
-    SeverityAndImpactAnalysis().run()
+    SeverityAndImpactAnalysis().fetch_and_plot()
 else:
     print('Need to specify which feature to run with --feature flag.')
