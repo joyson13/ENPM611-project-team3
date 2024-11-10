@@ -15,7 +15,7 @@ class BugPatternsAnalysis:
         self.bug_keywords = ['bug', 'error', 'fail', 'exception', 'crash', 'not working', 'unexpected']
         self.user = config.get_parameter('user')  # Get the optional user label
 
-    def run(self):
+    def fetch_and_plot(self):
         """Starting point for the bug pattern analysis."""
         issues: List[Issue] = DataLoader().get_issues()
 
