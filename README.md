@@ -1,22 +1,16 @@
-# ENPM611 Project Application Template
+# Poetry issues data analytics
 
-This is the template for the ENPM611 class project. Use this template in conjunction with the provided data to implement an application that analyzes GitHub issues for the [poetry](https://github.com/python-poetry/poetry/issues) Open Source project and generates interesting insights.
-
-This application template implements some of the basic functions:
-
-- `data_loader.py`: Utility to load the issues from the provided data file and returns the issues in a runtime data structure (e.g., objects)
-- `model.py`: Implements the data model into which the data file is loaded. The data can then be accessed by accessing the fields of objects.
-- `config.py`: Supports configuring the application via the `config.json` file. You can add other configuration paramters to the `config.json` file.
-- `run.py`: This is the module that will be invoked to run your application. Based on the `--feature` command line parameter, one of the three analyses you implemented will be run. You need to extend this module to call other analyses.
-
-With the utility functions provided, you should focus on implementing creative analyses that generate intersting and insightful insights.
-
-In addition to the utility functions, an example analysis has also been implemented in `example_analysis.py`. It illustrates how to use the provided utility functions and how to produce output.
+This is a software to analyze insightful trends from the open source project: [poetry](https://github.com/python-poetry/poetry/issues)
 
 ## Setup
 
-To get started, your team should create a fork of this repository. Then, every team member should clone your repository to their local computer. 
+Clone this repository either from [ENPM611-project-team3](https://github.com/joyson13/ENPM611-project-team3.git) or using the git command line interface
 
+### Prerequisites
+
+1. Python v3.10 or above (latest version recommended)
+2. pip v23 or above
+3. poetry_issues.json file (JSON array of all the issues of the target repository) in data folder
 
 ### Install dependencies
 
@@ -26,21 +20,34 @@ In the root directory of the application, create a virtual environment, activate
 pip install -r requirements.txt
 ```
 
-### Download and configure the data file
-
-Download the data file (in `json` format) from the project assignment in Canvas and update the `config.json` with the path to the file. Note, you can also specify an environment variable by the same name as the config setting (`ENPM611_PROJECT_DATA_PATH`) to avoid committing your personal path to the repository.
-
-
 ### Run an analysis
 
-With everything set up, you should be able to run the existing example analysis:
+The file to execute is `run.py`
+Command syntax
 
 ```
-python run.py --feature 0
+python run.py -f | --feature FEATURE [-u | --user USER] [-l | --label LABEL]
 ```
 
-That will output basic information about the issues to the command line.
+### Description of Features
+#### 1. Bug Pattern analysis
+  Analyze and visualize trends in issues based on labels\
+  Options accepted: -u | --user USER (Analyzes for all users if not provided)\
+  Command Syntax: `python run.py -f 1 [-u | --user USER]`
 
+#### 2. Contributor and Assignee analysis
+  Filter most engaged contributors and assignees based on type of issue\
+  Options accepted: -l | --label LABEL (Analyzes for all labels if not provided)\
+  Command syntax: `python run.py -f 2 [-l | --label LABEL]`
+
+#### 3. Severity and Impact analysis
+  Identify and visualize trends in severity patterns in contrast to the impact caused by issues\
+  Command syntax: `python run.py -f 3`
+
+### Description of Options
+`-f | --feature FEATURE`: provide the corresponding feature number (from above) to run analysis\
+`-u | --user USER`: provide a valid username\
+`-l | --label LABEL`: provide a valid label
 
 ## VSCode run configuration
 
