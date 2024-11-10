@@ -9,7 +9,7 @@ import argparse
 import config
 
 from bug_pattern_analysis import BugPatternsAnalysis
-from Contributor_and_assignee_analysis import ContributorAndAssigneeAnalysis
+from contributor_and_assignee_analysis import ContributorAndAssigneeAnalysis
 from severity_and_impact_analysis import SeverityAndImpactAnalysis
 
 
@@ -50,7 +50,13 @@ config.overwrite_from_args(args)
 if args.feature == 1:
     BugPatternsAnalysis().fetch_and_plot()
 elif args.feature == 2:
-    ContributorAndAssigneeAnalysis().fetch_and_plot()
+    # Handle label option for feature 2
+    if args.label:
+        # Pass label as parameter to the function
+        ContributorAndAssigneeAnalysis().fetch_and_plot_with_label(args.label)
+    else:
+        # Default behavior for feature 2 when no label is passed
+        ContributorAndAssigneeAnalysis().fetch_and_plot()
 elif args.feature == 3:
     SeverityAndImpactAnalysis().fetch_and_plot()
 else:
