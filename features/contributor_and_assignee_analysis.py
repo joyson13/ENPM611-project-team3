@@ -176,10 +176,6 @@ class ContributorAndAssigneeAnalysis:
         """
         Fetches the top contributors and assignees for a particular label and plots them.
         """
-        # Ask user for the number of contributors and assignees to display
-        top_contributors_count = int(input("Enter the number of contributors to display: "))
-        top_assignees_count = int(input("Enter the number of assignees to display: "))
-
         contributor_counts = {}
         assignee_counts = {}
 
@@ -200,6 +196,15 @@ class ContributorAndAssigneeAnalysis:
         # Create DataFrames from counts
         contributor_df = pd.DataFrame(list(contributor_counts.items()), columns=['Contributor', 'Issue Count'])
         assignee_df = pd.DataFrame(list(assignee_counts.items()), columns=['Assignee', 'Issue Count'])
+
+        # Check if the DataFrames are empty
+        if contributor_df.empty and assignee_df.empty:
+            print(f"Error: No such label '{label}' found.")
+            return
+
+        # Ask user for the number of contributors and assignees to display only if data is available
+        top_contributors_count = int(input("Enter the number of contributors to display: "))
+        top_assignees_count = int(input("Enter the number of assignees to display: "))
 
         # Plot the analysis for contributors and assignees with the specified label
         self.plot_contributors_and_assignees(contributor_df, assignee_df, top_contributors_count, top_assignees_count, label)
