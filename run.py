@@ -6,9 +6,11 @@ the command line to run the analyses.
 """
 
 import argparse
-
 import config
-from example_analysis import ExampleAnalysis
+
+from features.bug_pattern_analysis import BugPatternsAnalysis
+from features.contributor_and_assignee_analysis import ContributorAndAssigneeAnalysis
+from features.severity_and_impact_analysis import SeverityAndImpactAnalysis
 
 
 def parse_args():
@@ -45,13 +47,17 @@ args = parse_args()
 config.overwrite_from_args(args)
     
 # Run the feature specified in the --feature flag
-if args.feature == 0:
-    ExampleAnalysis().run()
-elif args.feature == 1:
-    pass # TODO call first analysis
+if args.feature == 1:
+    BugPatternsAnalysis().fetch_and_plot()
 elif args.feature == 2:
-    pass # TODO call second analysis
+    # Handle label option for feature 2
+    if args.label:
+        # Pass label as parameter to the function
+        ContributorAndAssigneeAnalysis().fetch_and_plot_with_label(args.label)
+    else:
+        # Default behavior for feature 2 when no label is passed
+        ContributorAndAssigneeAnalysis().fetch_and_plot()
 elif args.feature == 3:
-    pass # TODO call third analysis
+    SeverityAndImpactAnalysis().fetch_and_plot()
 else:
     print('Need to specify which feature to run with --feature flag.')
