@@ -81,6 +81,7 @@ class ContributorAndAssigneeAnalysis:
 
         # Adjust layout for better readability
         plt.tight_layout()
+        plt.subplots_adjust(wspace=0.2, hspace=0.2, left=0.04, right=0.99, top=0.938, bottom=0.26)
         plt.show()
 
 
